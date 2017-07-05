@@ -1,0 +1,20 @@
+﻿<Window x:Class="StormInfo.Pages.Notification"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:resx="clr-namespace:StormInfo.Properties"
+        mc:Ignorable="d"
+        Title="Notification" Height="90" Width="300" ResizeMode="NoResize" WindowStyle="None" DataContext="{Binding Notification, Source={StaticResource Locator}}" Opacity="{Binding TransitionOpacity}"  Left="{Binding LeftMargin}" Top="{Binding TopMargin}" AllowsTransparency="True" ShowInTaskbar="False" Background="{x:Null}" Topmost="True">
+    <Grid Background="{Binding Color}">
+        <Grid HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="300">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{x:Static resx:Resources.NotificationHeader}" VerticalAlignment="Center" Grid.Row="0" FontFamily="Lato" FontWeight="Bold" FontSize="14" Foreground="White"/>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Details}" VerticalAlignment="Center" Grid.Row="1" FontFamily="Lato" FontSize="12" Foreground="White" TextAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Window>

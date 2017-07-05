@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="https://burze.dzis.net/soap.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="serwerSOAP" targetNamespace="https://burze.dzis.net/soap.php" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="https://burze.dzis.net/soap.php">
+      <xsd:complexType name="MyComplexTypeMiejscowosc">
+        <xsd:all>
+          <xsd:element name="y" nillable="true" type="xsd:float" />
+          <xsd:element name="x" nillable="true" type="xsd:float" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="MyComplexTypeOstrzezenia">
+        <xsd:all>
+          <xsd:element name="od_dnia" nillable="true" type="xsd:string" />
+          <xsd:element name="do_dnia" nillable="true" type="xsd:string" />
+          <xsd:element name="mroz" nillable="true" type="xsd:int" />
+          <xsd:element name="mroz_od_dnia" nillable="true" type="xsd:string" />
+          <xsd:element name="mroz_do_dnia" nillable="true" type="xsd:string" />
+          <xsd:element name="upal" nillable="true" type="xsd:int" />
+          <xsd:element name="upal_od_dnia" nillable="true" type="xsd:string" />
+          <xsd:element name="upal_do_dnia" nillable="true" type="xsd:string" />
+          <xsd:element name="wiatr" nillable="true" type="xsd:int" />
+          <xsd:element name="wiatr_od_dnia" nillable="true" type="xsd:string" />
+          <xsd:element name="wiatr_do_dnia" nillable="true" type="xsd:string" />
+          <xsd:element name="opad" nillable="true" type="xsd:int" />
+          <xsd:element name="opad_od_dnia" nillable="true" type="xsd:string" />
+          <xsd:element name="opad_do_dnia" nillable="true" type="xsd:string" />
+          <xsd:element name="burza" nillable="true" type="xsd:int" />
+          <xsd:element name="burza_od_dnia" nillable="true" type="xsd:string" />
+          <xsd:element name="burza_do_dnia" nillable="true" type="xsd:string" />
+          <xsd:element name="traba" nillable="true" type="xsd:int" />
+          <xsd:element name="traba_od_dnia" nillable="true" type="xsd:string" />
+          <xsd:element name="traba_do_dnia" nillable="true" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="MyComplexTypeBurza">
+        <xsd:all>
+          <xsd:element name="liczba" nillable="true" type="xsd:int" />
+          <xsd:element name="odleglosc" nillable="true" type="xsd:float" />
+          <xsd:element name="kierunek" nillable="true" type="xsd:string" />
+          <xsd:element name="okres" nillable="true" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="KeyAPIIn">
+    <wsdl:part name="klucz" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="KeyAPIOut">
+    <wsdl:part name="return" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="miejscowoscIn">
+    <wsdl:part name="nazwa" type="xsd:string" />
+    <wsdl:part name="klucz" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="miejscowoscOut">
+    <wsdl:part name="return" type="tns:MyComplexTypeMiejscowosc" />
+  </wsdl:message>
+  <wsdl:message name="ostrzezenia_pogodoweIn">
+    <wsdl:part name="y" type="xsd:float" />
+    <wsdl:part name="x" type="xsd:float" />
+    <wsdl:part name="klucz" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ostrzezenia_pogodoweOut">
+    <wsdl:part name="return" type="tns:MyComplexTypeOstrzezenia" />
+  </wsdl:message>
+  <wsdl:message name="szukaj_burzyIn">
+    <wsdl:part name="y" type="xsd:string" />
+    <wsdl:part name="x" type="xsd:string" />
+    <wsdl:part name="promien" type="xsd:int" />
+    <wsdl:part name="klucz" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="szukaj_burzyOut">
+    <wsdl:part name="return" type="tns:MyComplexTypeBurza" />
+  </wsdl:message>
+  <wsdl:message name="miejscowosci_listaIn">
+    <wsdl:part name="nazwa" type="xsd:string" />
+    <wsdl:part name="kraj" type="xsd:string" />
+    <wsdl:part name="klucz" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="miejscowosci_listaOut">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="serwerSOAPPort">
+    <wsdl:operation name="KeyAPI">
+      <documentation>Uwierzytelnianie do uslugi API
+                Input 
+                string klucz do uslugi API
+                Output
+                boolean
+                --- ENG ---
+                Authentication service API
+                Input 
+                string klucz Key to the service API
+                Output
+                boolean</documentation>
+      <wsdl:input message="tns:KeyAPIIn" />
+      <wsdl:output message="tns:KeyAPIOut" />
+    </wsdl:operation>
+    <wsdl:operation name="miejscowosc">
+      <documentation>Ustala wspolrzedne dla wskazanej miejscowosci. Zgodnie z lista miejscowosci na stronie.
+                Input
+                string nazwa Nazwa miejscowosci
+                string klucz do uslugi API, parametr opcjonalny jezeli uwierzytelnienie wykonane poprzez naglowek.
+                Output
+                float x, 
+                float y Wspolrzedne (DMS) miejscowosci.
+                --- ENG ---
+                Sets the coordinates for the specified locality. According to the list of village on the site.
+                Input
+                string nazwa Name of the town
+                string klucz Key to the service API, optional parameter if the authentication header.
+                Output
+                float x
+                float y Coordinates of a location (DMS).</documentation>
+      <wsdl:input message="tns:miejscowoscIn" />
+      <wsdl:output message="tns:miejscowoscOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ostrzezenia_pogodowe">
+      <documentation>Sprawdza czy dla danego punktu, wydano ostrzezenia pogodowe. Tylko obszar Polski.
+                Input
+                float y Wspolrzedna y
+                float x Wspolrzedna x
+                string klucz do uslugi API, parametr opcjonalny jezeli uwierzytelnienie wykonane poprzez naglowek.
+                Output
+                string od_dnia Nieuzywany
+                string do_dnia Nieuzywany
+                integer mroz,
+                string mroz_od_dnia Mroz ostrzezenie od dnia (UTC), np. 2014-12-21 20:45:00,
+                string mroz_do_dnia Mroz ostrzezenie do dnia (UTC),
+                integer upal, 
+                string upal_od_dnia Upal ostrzezenie od dnia (UTC), np. 2014-12-21 20:45:00,
+                string upal_do_dnia Upal ostrzezenie do dnia (UTC),
+                integer wiatr,
+                string wiatr_od_dnia Wiatr ostrzezenie od dnia (UTC), np. 2014-12-21 20:45:00,
+                string wiatr_do_dnia Wiatr ostrzezenie do dnia (UTC),
+                integer opad, 
+                string opad_od_dnia Opad ostrzezenie od dnia (UTC), np. 2014-12-21 20:45:00,
+                string opad_do_dnia Opad ostrzezenie do dnia (UTC),
+                integer burza, 
+                string burza_od_dnia Burza ostrzezenie od dnia (UTC), np. 2014-12-21 20:45:00,
+                string burza_do_dnia Burza ostrzezenie do dnia (UTC), 
+                integer traba. 
+                string traba_od_dnia Traba ostrzezenie od dnia (UTC), np. 2014-12-21 20:45:00,
+                string traba_do_dnia Traba ostrzezenie do dnia (UTC), 
+                Oznaczenie 0 - brak, 1 - I stopien, 2 - II stopien, 3 - III stopien.
+                ---- ENG ----
+                Checks if a given point, issued weather warnings. Only the Polish area.
+                Input
+                float y Coordinate y
+                float x Coordinate x
+                string klucz Key to the service API, optional parameter if the authentication header.
+                Output
+                string od_dnia Not used,
+                string do_dnia Not used,
+                integer mroz Frost,
+                string mroz_od_dnia Warning frost of date (UTC) eg 2014-12-21 20:45:00,
+                string mroz_do_dnia Warning frost to day, 
+                integer upal Heat, 
+                string upal_od_dnia Warning heat of date (UTC) eg 2014-12-21 20:45:00,
+                string upal_do_dnia Warning heat to day, 
+                integer wiatr Wind,
+                string wiatr_od_dnia Warning wind of date (UTC) eg 2014-12-21 20:45:00,
+                string wiatr_do_dnia Warning wind to day,  
+                integer opad Precipitation, 
+                string opad_od_dnia Warning precipitation of date (UTC) eg 2014-12-21 20:45:00,
+                string opad_do_dnia Warning precipitation to day, 
+                integer burza Storms, 
+                string burza_od_dnia Warning storm of date (UTC) eg 2014-12-21 20:45:00,
+                string burza_do_dnia Warning storm to day, 
+                integer traba Tornados. 
+                string traba_od_dnia Warning tornados of date (UTC) eg 2014-12-21 20:45:00,
+                string traba_do_dnia Warning tornados to day, 
+                Determination of 0 - no, 1 - first degree, 2 - second degree, 3 - third degree.</documentation>
+      <wsdl:input message="tns:ostrzezenia_pogodoweIn" />
+      <wsdl:output message="tns:ostrzezenia_pogodoweOut" />
+    </wsdl:operation>
+    <wsdl:operation name="szukaj_burzy">
+      <documentation>Sprawdza czy dla danego punktu o wskazanym promieniu monitorowania zarejestrowano wyladowania atmosferyczne.
+                Input 
+                string y Wspolrzedna y,
+                string x Wspolrzedna x,
+                integer promien Promien objety analiza, opcjonalne. Domyslnie 25 km,
+                string klucz do uslugi API, parametr opcjonalny jezeli uwierzytelnienie wykonane poprzez naglowek.
+                Output
+                integer liczba Liczba wyladowan w wskazanym promieniu od wybranego punktu,
+                float odleglosc Odleglosc do najblizszego zarejestrowanego wyladowania,
+                string kierunek Kierunek do najblizszego wyladowania (E, NE, N, NW, W, SW, S, SE). Opis W - zachod, N - polnoc, E - wschod, S - poludnie.
+                integer okres - liczba minut, okres czasu obejmujacy dane (10, 15, 20 minut).
+                --- ENG ---
+                Checks if a given point with a specified radius of monitoring registered lightnings.
+                Input
+                string y Coordinate y
+                string x Coordinate x
+                integer promien The radius covered by point, optional. By default, 25 km
+                string klucz Key to the service API, optional parameter if the authentication header.
+                Output
+                integer liczba The number of lightning in specified radius from a selected point
+                float odleglosc The distance to the nearest registered lightning
+                string kierunek The direction to the nearest lightning (E, E, N , NW, W, SW, S, SE). Description W - West, N - North, E - East, S - South.
+                integer okres - The number of minutes of time period containing the data (10, 15, 20 minutes)</documentation>
+      <wsdl:input message="tns:szukaj_burzyIn" />
+      <wsdl:output message="tns:szukaj_burzyOut" />
+    </wsdl:operation>
+    <wsdl:operation name="miejscowosci_lista">
+      <documentation>Zwraca liste miejscowosci na podstawie podanego ciagu znakow.
+                Input
+                string nazwa Nazwa miejscowosci, minimum trzy znaki.
+                string kraj Kod ISO 3166 (kod alfa-2) np. PL tylko miejscowosci na obszarze Polski. Jezeli wszystkie wstaw pusty ciag.
+                string klucz do uslugi API, parametr opcjonalny jezeli uwierzytelnienie wykonane poprzez naglowek.
+                Output
+                string Lista miejscowosci zapisana w JSON
+                --- ENG ---
+                Returns a list of the village on the basis of the specified string.
+                Input
+                string nazwa Name of the town a minimum of three characters.
+                string kraj ISO 3166 (alfa-2) code for example. PL only town on the Polish territory. If all insert an empty string.
+                string klucz Key to the service API, optional parameter if the authentication header.
+                Output
+                string List of town saved in JSON</documentation>
+      <wsdl:input message="tns:miejscowosci_listaIn" />
+      <wsdl:output message="tns:miejscowosci_listaOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="serwerSOAPBinding" type="tns:serwerSOAPPort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="KeyAPI">
+      <soap:operation soapAction="https://burze.dzis.net/soap.php#KeyAPI" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://burze.dzis.net/soap.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://burze.dzis.net/soap.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="miejscowosc">
+      <soap:operation soapAction="https://burze.dzis.net/soap.php#miejscowosc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://burze.dzis.net/soap.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://burze.dzis.net/soap.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ostrzezenia_pogodowe">
+      <soap:operation soapAction="https://burze.dzis.net/soap.php#ostrzezenia_pogodowe" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://burze.dzis.net/soap.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://burze.dzis.net/soap.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="szukaj_burzy">
+      <soap:operation soapAction="https://burze.dzis.net/soap.php#szukaj_burzy" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://burze.dzis.net/soap.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://burze.dzis.net/soap.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="miejscowosci_lista">
+      <soap:operation soapAction="https://burze.dzis.net/soap.php#miejscowosci_lista" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="https://burze.dzis.net/soap.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="https://burze.dzis.net/soap.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="serwerSOAPService">
+    <wsdl:port name="serwerSOAPPort" binding="tns:serwerSOAPBinding">
+      <soap:address location="https://burze.dzis.net/soap.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

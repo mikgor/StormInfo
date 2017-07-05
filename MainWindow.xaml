@@ -1,0 +1,14 @@
+﻿<Window x:Class="StormInfo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="StormInfo" Height="350" Width="525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    
+    <Grid Background="#FF3C4759">
+        <Grid HorizontalAlignment="Left" Height="296" Margin="7,13,0,0" VerticalAlignment="Top" Width="500">
+            <Frame Name="FrameController" Content="Frame" HorizontalAlignment="Left" Height="296" VerticalAlignment="Top" Width="500" Source="/StormInfo;component/Pages/IntroPage.xaml" NavigationUIVisibility="Hidden"/>
+        </Grid>
+    </Grid>
+</Window>

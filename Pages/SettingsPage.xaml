@@ -1,0 +1,40 @@
+﻿<Page x:Class="StormInfo.Pages.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:resx="clr-namespace:StormInfo.Properties"
+      xmlns:local="clr-namespace:StormInfo.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="296" d:DesignWidth="500"
+      Title="SettingsPage">
+
+    <Grid DataContext="{Binding Settings, Source={StaticResource Locator}}" Opacity="{Binding TransitionOpacity}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Button Content="{x:Static resx:Resources.LocationBack}" Command="{Binding BackCommand}" HorizontalAlignment="Left" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Left" Background="{x:Null}" Foreground="#FF7E899B" BorderBrush="{x:Null}" FontSize="16" FontWeight="Bold" FontFamily="Lato"/>
+        <TextBlock HorizontalAlignment="Center" Height="30" TextWrapping="Wrap" Text="{x:Static resx:Resources.SettingsTitle}" VerticalAlignment="Center" Width="497" Name="InfoTB" TextAlignment="Center" Foreground="White" FontWeight="Bold" FontFamily="Lato" FontSize="24" Grid.Row="1" />
+        <Grid HorizontalAlignment="Left" Height="84" Grid.Row="2" VerticalAlignment="Top" Width="498" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{x:Static resx:Resources.SettingsStormRadius}" VerticalAlignment="Center" FontFamily="Lato" Foreground="White" FontSize="14" Grid.Column="0" Grid.Row="0"/>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Lato" Foreground="White" FontSize="14" Grid.Column="1" Grid.Row="0" Text="{x:Static resx:Resources.SettingsNotificationsEnabled}"/>
+            <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding StormRange}" VerticalAlignment="Center" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}" Foreground="White" BorderBrush="#FF7E899B" FontFamily="Lato" FontSize="14" SelectionBrush="#FF5D92E8" Margin="0" Padding="0,0,0,5" CaretBrush="White" BorderThickness="0,0,0,1" />
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding LightningNumber}" VerticalAlignment="Center" FontFamily="Lato" Foreground="#FF7E899B" FontSize="22" Grid.Column="1" Grid.Row="1" FontWeight="Bold"/>
+            <CheckBox Content="{x:Static resx:Resources.SettingsNotificationsEnabledSetting}" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Height="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Lato" Foreground="White" BorderBrush="{x:Null}" IsChecked="{Binding NotificationsEnabled}"/>
+        </Grid>
+        <Button Content="{x:Static resx:Resources.SettingsSave}" Command="{Binding SaveCommand}" HorizontalAlignment="Center" Height="28" Grid.Row="3" VerticalAlignment="Top" Width="207" Foreground="White" BorderBrush="{x:Null}" Background="#26FFFFFF" FontFamily="Lato" FontWeight="Bold" Padding="1,2,1,1"/>
+        <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{x:Static resx:Resources.DataSource}" VerticalAlignment="Top" Grid.Row="4" Foreground="#FF7E899B" FontSize="11" FontFamily="Lato"/>
+    </Grid>
+</Page>
